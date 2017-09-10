@@ -25,13 +25,10 @@ public class CollectionTestSuite {
         //When
         numbers = oddNumbersExterminator.exterminate(numbers);
         //Then
-        boolean areThereAnyOdds = false;
         for(Integer currentNumber : numbers){
-            if(currentNumber % 2 != 0){
-                areThereAnyOdds = true;
-            }
+            Assert.assertFalse(currentNumber % 2 != 0);
         }
-        Assert.assertFalse(areThereAnyOdds);
+
     }
 
     @Test
@@ -51,12 +48,9 @@ public class CollectionTestSuite {
         //When
         numbers = oddNumbersExterminator.exterminate(numbers);
         //Then
-        boolean areThereAnyOdds = false;
         for(Integer currentNumber : numbers){
-            if(currentNumber % 2 != 0){
-                areThereAnyOdds = true;
-            }
+            Assert.assertFalse(currentNumber % 2 != 0);
         }
-        Assert.assertFalse(areThereAnyOdds);
+
     }
 }
