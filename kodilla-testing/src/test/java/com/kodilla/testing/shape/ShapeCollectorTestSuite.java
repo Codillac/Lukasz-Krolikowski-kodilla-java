@@ -27,9 +27,10 @@ public class ShapeCollectorTestSuite {
 
         //When
         shapeCollector.removeFigure(shapeExample);
+        int result1 = shapeCollector.figures.size();
 
         //Then
-        Assert.assertTrue(shapeCollector.getFigure(0) == null);
+        Assert.assertEquals(0, result1);
     }
 
     @Test

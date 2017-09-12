@@ -10,20 +10,16 @@ public class ShapeCollector {
     }
 
     public void removeFigure(Shape shape) {
-        if(figures.contains(shape)){
-            figures.remove(shape);
-        }
+        figures.remove(shape);
     }
 
     public Shape getFigure(int n){
-        Shape result = null;
-        if(n >= 0 && n < figures.size()){
-            result = figures.get(n);
-        }
-        return result;
+        return figures.get(n);
     }
 
     public void showFigures(){
-        // does nothing
+        for(Shape currentShape : figures){
+            System.out.println("Shape: " + currentShape.getShapeName() + "Field: " + currentShape.getField());
+        }
     }
 }
