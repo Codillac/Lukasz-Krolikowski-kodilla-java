@@ -8,7 +8,7 @@ public class StatisticsCalculation {
     Double avgNumberOfCommentsPerUser;
     Double avgNumberOfCommentsPerPost;
 
-    public void calculateAdvStatistics(Statistics statistics){
+    public boolean calculateAdvStatistics(Statistics statistics){
         numberOfUsers = statistics.userNames().size();
         numberOfPosts = statistics.postsCount();
         numberOfComments = statistics.commentsCount();
@@ -17,19 +17,20 @@ public class StatisticsCalculation {
             avgNumberOfPostsPerUser = (double) numberOfPosts / (double) numberOfUsers;
             avgNumberOfCommentsPerUser = (double) numberOfComments / (double) numberOfUsers;
         } else {
-            avgNumberOfPostsPerUser = null;
-            avgNumberOfCommentsPerUser = null;
+            return false;
         }
 
         if(numberOfPosts != 0){
             avgNumberOfCommentsPerPost = (double) numberOfComments / (double) numberOfPosts;
         } else {
-            avgNumberOfCommentsPerPost = null;
+            return false;
         }
-
+        return true;
     }
 
     public void showStatistics(){
-        // does nothing
+        System.out.println("Average number of Posts per User: " + avgNumberOfPostsPerUser);
+        System.out.println("Average number of Comments per User: " + avgNumberOfCommentsPerUser);
+        System.out.println("Average number of Comments per Post: " + avgNumberOfCommentsPerPost);
     }
 }

@@ -22,13 +22,10 @@ public class StatisticsCalculationTestSuite {
         statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //When
-        Double result1 = statisticsCalculation.avgNumberOfPostsPerUser;
-        Double result2 = statisticsCalculation.avgNumberOfCommentsPerPost;
+        boolean result = statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //Then
-        Assert.assertEquals(0, result1, 0);
-        Assert.assertEquals(null, result2);
-
+        Assert.assertFalse(result);
     }
 
     @Test
@@ -81,8 +78,11 @@ public class StatisticsCalculationTestSuite {
         //Given
         StatisticsCalculation statisticsCalculation = new StatisticsCalculation();
         Statistics statisticsMock = mock(Statistics.class);
+        List<String> userNamesList = new ArrayList<String>();
+        userNamesList.add("John Smith");
         when(statisticsMock.postsCount()).thenReturn(500);
         when(statisticsMock.commentsCount()).thenReturn(150);
+        when(statisticsMock.userNames()).thenReturn(userNamesList);
         statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //When
@@ -97,8 +97,11 @@ public class StatisticsCalculationTestSuite {
         //Given
         StatisticsCalculation statisticsCalculation = new StatisticsCalculation();
         Statistics statisticsMock = mock(Statistics.class);
+        List<String> userNamesList = new ArrayList<String>();
+        userNamesList.add("John Smith");
         when(statisticsMock.postsCount()).thenReturn(150);
         when(statisticsMock.commentsCount()).thenReturn(500);
+        when(statisticsMock.userNames()).thenReturn(userNamesList);
         statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //When
@@ -118,12 +121,10 @@ public class StatisticsCalculationTestSuite {
         statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //When
-        Double result1 = statisticsCalculation.avgNumberOfPostsPerUser;
-        Double result2 = statisticsCalculation.avgNumberOfCommentsPerUser;
+        boolean result = statisticsCalculation.calculateAdvStatistics(statisticsMock);
 
         //Then
-        Assert.assertEquals(null, result1);
-        Assert.assertEquals(null, result2);
+        Assert.assertFalse(result);
     }
 
     @Test
