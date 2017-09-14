@@ -1,3 +1,4 @@
 include 'kodilla-testing'
 include 'com.kodilla.testing.forum'
+include 'kodilla-stream'
 
