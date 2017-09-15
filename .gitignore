@@ -26,3 +26,5 @@ nbdist/
 kodilla-testing/out
 kodilla-stream/src/main/java/com/kodilla/stream/iterate/
         out/
+kodilla-stream/out/
+out/
