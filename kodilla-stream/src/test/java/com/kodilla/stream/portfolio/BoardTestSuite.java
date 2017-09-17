@@ -6,7 +6,11 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
+
+import static java.lang.Math.toIntExact;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class BoardTestSuite {
     public Board prepareTestData(){
@@ -136,5 +140,24 @@ public class BoardTestSuite {
 
         //Then
         Assert.assertEquals(2, longTasks);
+    }
+    @Test
+    public void testAddTaskListAverageWorkingOnTask(){
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> listOfLists = new ArrayList<>();
+        listOfLists.add(new TaskList("In progress"));
+        OptionalDouble result = OptionalDouble.of(10.0);
+        OptionalDouble averageWorkingOnTask = project.getTaskLists().stream()
+                .filter(listOfLists::contains)
+                .flatMap(taskList -> taskList.getTasks().stream())
+                .map(task -> task.getCreated().until(LocalDate.now(), DAYS))
+                .mapToInt(days -> toIntExact(days))
+                .average();
+
+        //Then
+        Assert.assertEquals(result, averageWorkingOnTask);
     }
 }
