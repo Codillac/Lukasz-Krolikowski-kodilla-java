@@ -8,7 +8,7 @@ public final class World {
     private final List<Continent> continents = new ArrayList<>();
 
     public BigDecimal getPeopleQuantity(){
-        BigDecimal peopleQuantity = new BigDecimal("0");
+        BigDecimal peopleQuantity;
         peopleQuantity = continents.stream()
                 .flatMap(continent -> continent.getCountriesOnContinent().stream())
                 .map(Country::getPeopleQuantity)

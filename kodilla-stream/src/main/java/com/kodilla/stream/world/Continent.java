@@ -18,4 +18,8 @@ public final class Continent {
     public List<Country> getCountriesOnContinent() {
         return new ArrayList<>(countriesOnContinent);
     }
+
+    public String getContinentName() {
+        return continentName;
+    }
 }
