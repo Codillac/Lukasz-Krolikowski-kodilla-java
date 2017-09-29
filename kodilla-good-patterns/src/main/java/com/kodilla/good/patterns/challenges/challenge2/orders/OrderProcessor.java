@@ -25,7 +25,7 @@ public class OrderProcessor {
             productOrderRepository.createOrder(orderRequest, LocalDate.now());
             return new ProductOrderDto(orderRequest.getUser(), orderRequest.getProduct(), true);
         } else {
-            return new ProductOrderDto(orderRequest.getUser(), orderRequest.getProduct(), true);
+            return new ProductOrderDto(orderRequest.getUser(), orderRequest.getProduct(), false);
         }
     }
 }
