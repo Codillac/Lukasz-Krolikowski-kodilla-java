@@ -1,4 +1,7 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.challenge2.products;
+
+import com.kodilla.good.patterns.challenges.challenge2.orders.Order;
+import com.kodilla.good.patterns.challenges.challenge2.orders.ProductOrderRepository;
 
 import java.time.LocalDate;
 import java.util.HashMap;

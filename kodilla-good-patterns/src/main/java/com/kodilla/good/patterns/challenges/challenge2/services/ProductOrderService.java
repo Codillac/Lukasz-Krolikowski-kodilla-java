@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.challenge2.services;
+
+import com.kodilla.good.patterns.challenges.challenge2.orders.ProductOrderRequest;
 
 public class ProductOrderService {
 
