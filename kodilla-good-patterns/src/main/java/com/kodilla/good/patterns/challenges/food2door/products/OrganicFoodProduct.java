@@ -25,6 +25,17 @@ public class OrganicFoodProduct implements Product {
     }
 
     @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = productName.hashCode();
+        temp = Double.doubleToLongBits(productPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (isGlutenFree ? 1 : 0);
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
