@@ -45,12 +45,8 @@ public class ProductRepository {
         return productSubcontractorMap.get(product);
     }
 
-    public Product getProductFromRepository(String productName, double productPrice, boolean isGlutenFree) {
+    public Product getProductFromRepository(Product product) {
 
-        List<Product> result = products.stream()
-                .filter(p -> p.getProductName() == productName && p.getProductPrice() == productPrice && p.isGlutenFree() == isGlutenFree)
-                .collect(Collectors.toList());
-
-        return result.get(0);
+        return products.get(products.indexOf(product));
     }
 }
