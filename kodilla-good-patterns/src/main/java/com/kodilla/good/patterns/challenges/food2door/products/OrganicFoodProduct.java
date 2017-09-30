@@ -1,6 +1,6 @@
 package com.kodilla.good.patterns.challenges.food2door.products;
 
-public final class OrganicFoodProduct implements Product {
+public class OrganicFoodProduct implements Product {
 
     private final String productName;
     private final double productPrice;
