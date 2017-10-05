@@ -1,5 +1,6 @@
 package com.kodilla.spring.Reader;
 
+import com.kodilla.spring.reader.IfDayIsOddCondition;
 import com.kodilla.spring.reader.Reader;
 import com.kodilla.spring.reader.ReaderConfig;
 import org.junit.Test;
@@ -15,5 +16,17 @@ public class ReaderTestSuite {
 
         //When & Then
         reader.read();
+    }
+
+    @Test
+    public void testConditional() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext(ReaderConfig.class);
+
+        //When
+        boolean book2Exists = context.containsBean("book2");
+
+        //Then
+        System.out.println("The book2 was found in the container: " + book2Exists);
     }
 }
