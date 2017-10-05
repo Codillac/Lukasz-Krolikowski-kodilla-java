@@ -2,11 +2,13 @@ package com.kodilla.spring.calculator;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Random;
 
+@SpringBootApplication
 public class CalculatorTestSuite {
     @Test
     public void testCalculatorAdd() {
@@ -47,7 +49,7 @@ public class CalculatorTestSuite {
         Calculator calculator = context.getBean(Calculator.class);
         Random generator = new Random();
         double a = generator.nextInt(100) + generator.nextDouble();
-        double b = generator.nextInt(50) + generator.nextDouble();
+        double b = generator.nextInt(100) + generator.nextDouble();
 
         //When
         double result = calculator.mul(a, b);
@@ -62,8 +64,8 @@ public class CalculatorTestSuite {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
         Calculator calculator = context.getBean(Calculator.class);
         Random generator = new Random();
-        double a = generator.nextInt(100) + generator.nextDouble();
-        double b = generator.nextInt(50) + 1 + generator.nextDouble();
+        double a = generator.nextInt(500) + generator.nextDouble();
+        double b = generator.nextInt(100) + 1 + generator.nextDouble();
 
         //When
         double result = calculator.div(a, b);

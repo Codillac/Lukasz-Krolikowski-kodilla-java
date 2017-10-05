@@ -1,12 +1,12 @@
 package com.kodilla.spring.calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class Calculator {
     @Autowired
-    Display display;
+    private Display display;
 
     public double add(double a, double b) {
         double val = a + b;
@@ -32,7 +32,7 @@ public class Calculator {
             display.displayValue(val);
             return val;
         } else {
-            throw new  ArithmeticException();
+            throw new  ArithmeticException("Division by zero!");
         }
     }
 }
