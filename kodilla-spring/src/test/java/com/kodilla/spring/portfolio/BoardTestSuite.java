@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Optional;
+
 public class BoardTestSuite {
     @Test
     public void testTaskAdd() {
@@ -17,19 +19,16 @@ public class BoardTestSuite {
         board.getInProgressList().addTask("Learning Spring");
         board.getDoneList().addTask("Learned Stream");
 
-        String taskFromToDoList = board.getToDoList().getTasks().stream()
-                .findAny()
-                .toString();
-        String taskFromInProgressList = board.getInProgressList().getTasks().stream()
-                .findAny()
-                .toString();
-        String taskFromDoneList = board.getDoneList().getTasks().stream()
-                .findAny()
-                .toString();
+        Optional<String> taskFromToDoList = board.getToDoList().getTasks().stream()
+                .findAny();
+        Optional <String> taskFromInProgressList = board.getInProgressList().getTasks().stream()
+                .findAny();
+        Optional<String> taskFromDoneList = board.getDoneList().getTasks().stream()
+                .findAny();
 
         //Then
-        Assert.assertEquals("Optional[Learn Project Patterns]", taskFromToDoList);
-        Assert.assertEquals("Optional[Learning Spring]", taskFromInProgressList);
-        Assert.assertEquals("Optional[Learned Stream]", taskFromDoneList);
+        Assert.assertTrue(taskFromToDoList.isPresent());
+        Assert.assertTrue(taskFromInProgressList.isPresent());
+        Assert.assertTrue(taskFromDoneList.isPresent());
     }
 }
