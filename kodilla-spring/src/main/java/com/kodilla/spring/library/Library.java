@@ -19,11 +19,13 @@ public final class Library {
 
     private LibraryDbController libraryDbController;
 
-    public void saveToDb() {
+    public boolean saveToDb() {
         libraryDbController.saveData();
+        return true;
     }
 
-    public void loadFromDb() {
+    public boolean loadFromDb() {
         libraryDbController.loadData();
+        return true;
     }
 }

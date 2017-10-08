@@ -1,10 +1,14 @@
 package com.kodilla.spring.library;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LibraryTestSuite {
     @Test
@@ -27,10 +31,10 @@ public class LibraryTestSuite {
         Library library = context.getBean(Library.class);
 
         //When
-        library.saveToDb();
+        boolean result = library.saveToDb();
 
         //Then
-        //do nothing
+        Assert.assertTrue(result);
     }
 
     @Test
@@ -38,10 +42,17 @@ public class LibraryTestSuite {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
 
-        //When & Then
+        //When
         System.out.println("===== Beans list: ==== >>");
         Arrays.stream(context.getBeanDefinitionNames())
                 .forEach(System.out::println);
         System.out.println("<< ===== Beans List ====");
+
+        Optional<String> result = Arrays.stream(context.getBeanDefinitionNames())
+                .filter(s -> s.equals("library"))
+                .findAny();
+
+        //Then
+        Assert.assertTrue(result.isPresent());
     }
 }
