@@ -10,14 +10,22 @@ import java.util.List;
 public final class Library {
     private final List<String> books = new ArrayList<>();
 
-    @Autowired
-    private LibraryDbController libraryDbController;
-
-    public void saveToDb() {
-        libraryDbController.saveData();
+    public Library(LibraryDbController libraryDbController) {
+        this.libraryDbController = libraryDbController;
     }
 
-    public void loadFromDb() {
+    public Library() {
+    }
+
+    private LibraryDbController libraryDbController;
+
+    public boolean saveToDb() {
+        libraryDbController.saveData();
+        return true;
+    }
+
+    public boolean loadFromDb() {
         libraryDbController.loadData();
+        return true;
     }
 }
