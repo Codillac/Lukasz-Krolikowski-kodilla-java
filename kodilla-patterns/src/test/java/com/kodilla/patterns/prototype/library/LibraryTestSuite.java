@@ -34,7 +34,7 @@ public class LibraryTestSuite {
         //When
         try {
             library.getBooks().remove(library.searchBook("Title 1", "Author 1", LocalDate.of(1900, 1, 5)));
-        } catch (Exception e) {
+        } catch (BookNotFoundException e) {
             System.out.println(e);
         }
 

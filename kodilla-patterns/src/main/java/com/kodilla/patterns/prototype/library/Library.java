@@ -44,20 +44,14 @@ public class Library extends Prototype {
         return clonedLibrary;
     }
 
-    public Book searchBook(String title, String author, LocalDate publicationDate) {
-
-        Book resultBook = null;
+    public Book searchBook(String title, String author, LocalDate publicationDate) throws BookNotFoundException {
         Iterator<Book> listOfBooksIterator = books.iterator();
-        boolean ifHasBeenFound = false;
-        while (listOfBooksIterator.hasNext() && !ifHasBeenFound) {
+        while (listOfBooksIterator.hasNext()) {
             Book currentBook = listOfBooksIterator.next();
             if (currentBook.getTitle().equals(title) && currentBook.getAuthor().equals(author) && currentBook.getPublicationDate().equals(publicationDate)) {
-                resultBook = currentBook;
+                return currentBook;
             }
         }
-        if (resultBook == null) {
-            throw new NullPointerException("Book not found!");
-        }
-        return resultBook;
+        throw new BookNotFoundException("Book Not Found!");
     }
 }
