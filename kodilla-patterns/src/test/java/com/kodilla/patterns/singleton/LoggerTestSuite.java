@@ -10,12 +10,11 @@ public class LoggerTestSuite {
     @Test
     public void loggerTest() {
         //Given
-        String dateAndTimeOfLogEntry = LocalDate.now() + " " + LocalTime.now();
 
         //When
-        Logger.getInstance().log("Add file. " + dateAndTimeOfLogEntry);
+        String loggedDateAndTime = Logger.getInstance().log("Add file.");
 
         //Then
-        Assert.assertEquals("Add file. " + dateAndTimeOfLogEntry, Logger.getInstance().getLastLog());
+        Assert.assertEquals("Add file." + loggedDateAndTime, Logger.getInstance().getLastLog());
     }
 }
