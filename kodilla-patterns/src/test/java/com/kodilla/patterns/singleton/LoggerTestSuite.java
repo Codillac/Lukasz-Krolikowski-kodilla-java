@@ -10,7 +10,6 @@ public class LoggerTestSuite {
     @Test
     public void loggerTest() {
         //Given
-
         //When
         String loggedDateAndTime = Logger.getInstance().log("Add file.");
 
