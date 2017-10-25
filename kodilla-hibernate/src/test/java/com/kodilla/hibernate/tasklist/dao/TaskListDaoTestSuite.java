@@ -13,19 +13,20 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TaskListDaoTestSuite {
-    @Autowired
-    private TaskListDao taskListDao;
-    private static final String DEFAULT_DEDCRIPTION = "Task Lists are very useful";
+    private static final String DEFAULT_DESCRIPTION = "Task Lists are very useful";
     private static final String TODO = "To Do List";
     private static final String INPROGRESS = "In Progress List";
     private static final String DONE = "Done List";
 
+    @Autowired
+    private TaskListDao taskListDao;
+
     @Test
     public void testFindByListName() {
         //Given
-        TaskList toDoTaskList = new TaskList(TODO, DEFAULT_DEDCRIPTION);
-        TaskList inProgressTaskList = new TaskList(INPROGRESS, DEFAULT_DEDCRIPTION);
-        TaskList doneTaskList = new TaskList(DONE, DEFAULT_DEDCRIPTION);
+        TaskList toDoTaskList = new TaskList(TODO, DEFAULT_DESCRIPTION);
+        TaskList inProgressTaskList = new TaskList(INPROGRESS, DEFAULT_DESCRIPTION);
+        TaskList doneTaskList = new TaskList(DONE, DEFAULT_DESCRIPTION);
         taskListDao.save(toDoTaskList);
         taskListDao.save(inProgressTaskList);
         taskListDao.save(doneTaskList);
