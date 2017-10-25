@@ -71,11 +71,12 @@ public class TaskDaoTestSuite {
         Assert.assertNotEquals(0, id);
 
         //CleanUp
-        //taskDao.delete(id);
+        taskDao.delete(id);
     }
 
     @Test
-    public void randomTest() {
+    public void testAddRandomValuesToDataBase() {
+        taskDao.deleteAll();
         Random random = new Random();
         for (int i = 0; i < 20; i++) {
             Task task = new Task(Integer.toString(i),random.nextInt(3)+1);
