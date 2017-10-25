@@ -1,6 +1,7 @@
 package com.kodilla.hibernate.task.dao;
 
 import com.kodilla.hibernate.task.Task;
+import com.kodilla.hibernate.task.TaskFinancialDetails;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,5 +54,32 @@ public class TaskDaoTestSuite {
         //CleanUp
         int id = readTasks.get(0).getId();
         taskDao.delete(id);
+    }
+
+    @Test
+    public void testTaskDaoSaveWithFinancialDetails(){
+        //Given
+        Task task = new Task(DESCRIPTION, 30);
+        task.setTaskFinancialDetails(new TaskFinancialDetails(new BigDecimal(120), false));
+
+        //When
+        taskDao.deleteAll();
+        taskDao.save(task);
+        int id = task.getId();
+
+        //Then
+        Assert.assertNotEquals(0, id);
+
+        //CleanUp
+        //taskDao.delete(id);
+    }
+
+    @Test
+    public void randomTest() {
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            Task task = new Task(Integer.toString(i),random.nextInt(3)+1);
+            taskDao.save(task);
+        }
     }
 }
