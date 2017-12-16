@@ -137,12 +137,12 @@ public class CompanyDaoTestSuite {
         //When
         employeeDao.save(employee);
 
-        companyDao.save(company1);
-        companyDao.save(company2);
-        companyDao.save(company3);
-        companyDao.save(company4);
-        companyDao.save(company5);
-        companyDao.save(company6);
+//        companyDao.save(company1);
+//        companyDao.save(company2);
+//        companyDao.save(company3);
+//        companyDao.save(company4);
+//        companyDao.save(company5);
+//        companyDao.save(company6);
 
         List<Company> resultList = companyDao.retrieveByFirstThreeLettersOfCompanyName("Mic");
 
