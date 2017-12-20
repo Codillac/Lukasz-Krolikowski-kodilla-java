@@ -4,7 +4,6 @@ import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
 import com.kodilla.hibernate.manytomany.dao.CompanyDao;
 import com.kodilla.hibernate.manytomany.dao.EmployeeDao;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -62,55 +60,51 @@ public class FacadeTestSuite {
         employeeDao.save(employee4);
     }
 
-    @After
-    public void cleanUp() {
-        //CleanUp
-        try {
-            for (int i = 1; i <= 6; i++) {
-                companyDao.delete(i);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
     @Test
-    public void searchForCompanyTest() {
+    public void searchForCompanyTest() throws Exception {
         //Given
         String searchPhrase = "le";
 
         //When
-        List<Company> resultList = new ArrayList<>();
-        try {
-            resultList = facade.searchCompany(searchPhrase);
-            for (Company resultCompany : resultList) {
-                System.out.println(resultCompany.getName());
-            }
-        } catch (SearchException e) {
-            System.out.println(e);
-        }
+        List<Company> resultList = facade.searchCompany(searchPhrase);
 
         //Then
         Assert.assertEquals(2, resultList.size());
     }
 
     @Test
-    public void searchForEmployeeTest() {
+    public void searchForEmployeeTest() throws Exception {
         //Given
         String searchPhrase = "rr";
 
         //When
-        List<Employee> resultList = new ArrayList<>();
-        try {
-            resultList = facade.searchEmployee(searchPhrase);
-            for (Employee resultEmployee : resultList) {
-                System.out.println(resultEmployee.getFirstname() + " " + resultEmployee.getLastname());
-            }
-        } catch (SearchException e) {
-            System.out.println(e);
-        }
+        List<Employee> resultList = facade.searchEmployee(searchPhrase);
 
         //Then
         Assert.assertEquals(1, resultList.size());
+    }
+
+    @Test(expected = SearchException.class)
+    public void searchForCompanyTestException() throws Exception {
+        //Given
+        String searchPhrase = "aa";
+
+        //When
+        facade.searchCompany(searchPhrase);
+
+        //Then
+        //exception is thrown
+    }
+
+    @Test(expected = SearchException.class)
+    public void searchForEmployeeTestException() throws Exception {
+        //Given
+        String searchPhrase = "aa";
+
+        //When
+        facade.searchEmployee(searchPhrase);
+
+        //Then
+        //exception is thrown
     }
 }
