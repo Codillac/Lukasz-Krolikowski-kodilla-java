@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class OrderFacadeWatcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderFacadeWatcher.class);
 
-    @Before("execution(* com.codilla.patterns2.facade.api.OrderFacade.processOrder(..))" + "&& args(..,userId) + ")
+    @Before("execution(* com.codilla.patterns2.facade.api.OrderFacade.processOrder(..)) && args(..,userId)")
     public void logStart(Long userId) {
         LOGGER.info("Starting order processing of the user with Id: " + userId);
     }
