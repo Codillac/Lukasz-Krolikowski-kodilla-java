@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class StoredPostTestSuite {
+public class StoredProcTestSuite {
     @Test
     public void testUpdateVipLevels() throws SQLException {
         //Given
@@ -28,5 +28,27 @@ public class StoredPostTestSuite {
             howMany = rs.getInt("HOW_MANY");
         }
         Assert.assertEquals(0, howMany);
+    }
+
+    @Test
+    public void testUpdateBestSellers() throws SQLException {
+        //Given
+        DbManager dbManager = DbManager.getInstance();
+        String sqlUpdate = "UPDATE BOOKS SET BESTSELLER=FALSE";
+        Statement statement = dbManager.getConnection().createStatement();
+        statement.executeUpdate(sqlUpdate);
+
+        //When
+        String sqlProcedureCall = "CALL UpdateBestSellers()";
+        statement.execute(sqlProcedureCall);
+
+        //Then
+        String sqlCheckTable = "SELECT COUNT(*) AS HOW_MANY_BS FROM BOOKS WHERE BESTSELLER=TRUE";
+        ResultSet set = statement.executeQuery(sqlCheckTable);
+        int howMany = -1;
+        if (set.next()) {
+            howMany = set.getInt("HOW_MANY_BS");
+        }
+        Assert.assertEquals(4, howMany);
     }
 }
