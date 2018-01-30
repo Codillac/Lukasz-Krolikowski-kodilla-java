@@ -17,17 +17,33 @@ import static org.junit.Assert.assertTrue;
 public class CrudAppTestSuite {
     private static final String BASE_URL = "https://codillac.github.io/";
     private WebDriver driver;
-    private Random geneartor;
+    private Random generator;
+    private String taskName;
 
     @Before
     public void initTests() {
         driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
         driver.get(BASE_URL);
-        geneartor = new Random();
+        generator = new Random();
     }
 
     @After
-    public void cleanUpAfterTest() {
+    public void cleanUpAfterTest() throws InterruptedException {
+        driver.navigate().refresh();
+
+        Thread.sleep(5000);
+
+        while (!driver.findElement(By.xpath("//select[1]")).isDisplayed());
+
+        driver.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
+                .filter(anyRow -> anyRow.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]")).getText().equals(this.taskName))
+                .forEach(theRow ->
+                {
+                    WebElement button = theRow.findElement(By.xpath(".//button[text()=\"Delete\"]"));
+                    button.click();
+                });
+
+        Thread.sleep(2000);
         driver.close();
     }
 
@@ -35,7 +51,7 @@ public class CrudAppTestSuite {
         final String XPATH_TASK_NAME = "//form[contains(@action, \"createTask\")]/fieldset[1]/input";
         final String XPATH_TASK_CONTENT ="//form[contains(@action, \"createTask\")]/fieldset[2]/textarea";
         final String XPATH_ADD_BUTTON = "//form[contains(@action, \"createTask\")]/fieldset[3]/button";
-        String taskName = "Task number" + geneartor.nextInt(100000);
+        String taskName = "Task number" + generator.nextInt(100000);
         String taskContent = taskName + " content";
 
         WebElement name = driver.findElement(By.xpath(XPATH_TASK_NAME));
@@ -99,8 +115,8 @@ public class CrudAppTestSuite {
 
     @Test
     public void shouldCreateTrelloCard() throws InterruptedException {
-        String taskName = createCrudAppTestTask();
-        sendTaskToTrello(taskName);
-        assertTrue(checkTaskExistsInTrello(taskName));
+        this.taskName = createCrudAppTestTask();
+        sendTaskToTrello(this.taskName);
+        assertTrue(checkTaskExistsInTrello(this.taskName));
     }
 }
